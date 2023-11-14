@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_USERNAME="jenishan1611"
-DOCKER_TOKEN="dckr_pat_VluWhuCgoR1TsUUv62jDHflfxv8"
+
 
 if [[ $GIT_BRANCH == origin/dev]] ; then
     ./build.sh
