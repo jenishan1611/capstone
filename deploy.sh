@@ -2,7 +2,7 @@
 
 DOCKER_USERNAME="jenishan1611"
 
-if [[ $GIT_BRANCH == origin/dev ]]; then
+if [[ $BRANCH_NAME == "dev" ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
@@ -10,19 +10,19 @@ if [[ $GIT_BRANCH == origin/dev ]]; then
 
         IMAGE_NAME="reactimg"
 
-        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME
-
-        docker push $DOCKER_USERNAME/$IMAGE_NAME
+        # Tag and push the Docker image for the 'dev' branch
+        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME:dev
+        docker push $DOCKER_USERNAME/$IMAGE_NAME:dev
 
         if [ $? -eq 0 ]; then
-            echo "Docker image pushed successfully to Docker Hub."
+            echo "Docker image pushed successfully to Docker Hub for 'dev' branch."
         else
-            echo "Failed to push Docker image to Docker Hub."
+            echo "Failed to push Docker image to Docker Hub for 'dev' branch."
         fi
     else
         echo "Failed to log in to Docker Hub."
     fi
-elif [[ $GIT_BRANCH == origin/master ]]; then
+elif [[ $BRANCH_NAME == "master" ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
@@ -30,14 +30,14 @@ elif [[ $GIT_BRANCH == origin/master ]]; then
 
         IMAGE_NAME="reactimg"
 
-        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME
-
-        docker push $DOCKER_USERNAME/$IMAGE_NAME
+        # Tag and push the Docker image for the 'master' branch
+        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME:latest
+        docker push $DOCKER_USERNAME/$IMAGE_NAME:latest
 
         if [ $? -eq 0 ]; then
-            echo "Docker image pushed successfully to Docker Hub."
+            echo "Docker image pushed successfully to Docker Hub for 'master' branch."
         else
-            echo "Failed to push Docker image to Docker Hub."
+            echo "Failed to push Docker image to Docker Hub for 'master' branch."
         fi
     else
         echo "Failed to log in to Docker Hub."
