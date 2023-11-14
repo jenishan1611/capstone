@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         GITHUB_CREDENTIALS = credentials('git')
+        DOCKER_TOKEN = credentials('docker')
     }
 
     stages {
@@ -21,10 +22,10 @@ pipeline {
                     
                     
                     withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {                 
+                                       
                         sh './build.sh'
                         sh './deploy.sh'
-                    }
+                    
                     }
                 }
             }
