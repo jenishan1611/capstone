@@ -31,13 +31,16 @@ pipeline {
                         sh "./build.sh"
 
                         // Log in to Docker Hub
-                        withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
-                            // Tag and push the Docker image
-                            //docker.image(imageName).withTag(branchName.toLowerCase()).push()
-                            sh "./deploy.sh"
-                        }
+                    withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
+                     echo "Docker login successful."
 
-                        // Deploy using the deploy.sh script
+                    // Tag and push the Docker image
+                    echo "Tagging Docker image: ${imageName}"
+                    docker.image(imageName).withTag(branchName.toLowerCase()).push()
+
+                    echo "Pushing Docker image: ${imageName}"
+                    docker.image(imageName).push()
+                }
                         
                     }
                 }
