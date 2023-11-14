@@ -2,8 +2,7 @@
 
 DOCKER_USERNAME="jenishan1611"
 
-
-if [[ $GIT_BRANCH == origin/dev]] ; then
+if [[ $GIT_BRANCH == origin/dev ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
@@ -23,7 +22,7 @@ if [[ $GIT_BRANCH == origin/dev]] ; then
     else
         echo "Failed to log in to Docker Hub."
     fi
-else if [[ $GIT_BRANCH == origin/master ]] ; then
+elif [[ $GIT_BRANCH == origin/master ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
@@ -44,4 +43,5 @@ else if [[ $GIT_BRANCH == origin/master ]] ; then
         echo "Failed to log in to Docker Hub."
     fi
 else
-    echo "successfully pushed"
+    echo "Successfully pushed."
+fi
