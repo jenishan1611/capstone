@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   react-app:
-    images: reactimg
+    image: reactimg
     ports:
       - "80:80"
     
