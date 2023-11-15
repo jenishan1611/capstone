@@ -28,7 +28,7 @@ pipeline {
                         //def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
 
                         //sh "./build.sh"
-                        sh "./deploy.sh"
+                        //sh "./deploy.sh"
 
                 //         // Log in to Docker Hub
                 //     withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
@@ -41,6 +41,16 @@ pipeline {
                 //     echo "Pushing Docker image: ${imageName}"
                 //     docker.image(imageName).push()
                 // }
+                        withCredentials([string(credentialsId: 'docker-credential-id', variable: 'DOCKER_TOKEN')]) {
+                        def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
+                        def loginStatus = sh(script: loginCmd, returnStatus: true)
+                        
+                        if (loginStatus == 0) {
+                            echo "Docker login successful."
+                        } else {
+                            error "Failed to log in to Docker Hub."
+                        }
+                    }
 
                         
                     }
