@@ -2,8 +2,10 @@
 
 DOCKER_USERNAME="jenishan1611"
 
-# Get the current branch name
-BRANCH_NAME=$(echo $GITHUB_REF | sed 's/refs\/heads\///')
+PAYLOAD_FILE="payload.json"
+
+# Extract the branch name using jq
+BRANCH_NAME=$(cat $PAYLOAD_FILE | jq -r '.ref' | sed 's/refs\/heads\///')
 
 # Print the branch name for debugging
 echo "Branch: $BRANCH_NAME"
