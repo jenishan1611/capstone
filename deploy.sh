@@ -2,6 +2,8 @@
 
 DOCKER_USERNAME="jenishan1611"
 
+BRANCH_NAME = $(git rev-parse --abbrev-ref HEAD)
+
 if [[ $BRANCH_NAME == "dev" ]]; then
     #./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
