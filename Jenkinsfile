@@ -28,18 +28,20 @@ pipeline {
                         def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
 
                         sh "./build.sh"
+                        sh "./deploy.sh"
 
-                        // Log in to Docker Hub
-                    withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
-                     echo "Docker login successful."
+                //         // Log in to Docker Hub
+                //     withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
+                //      echo "Docker login successful."
 
-                    // Tag and push the Docker image
-                    echo "Tagging Docker image: ${imageName}"
-                    docker.image(imageName).push("--tag=${branchName.toLowerCase()}")
+                //     // Tag and push the Docker image
+                //     echo "Tagging Docker image: ${imageName}"
+                //     docker.image(imageName).push("--tag=${branchName.toLowerCase()}")
 
-                    echo "Pushing Docker image: ${imageName}"
-                    docker.image(imageName).push()
-                }
+                //     echo "Pushing Docker image: ${imageName}"
+                //     docker.image(imageName).push()
+                // }
+
                         
                     }
                 }
