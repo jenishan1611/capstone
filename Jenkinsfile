@@ -20,8 +20,7 @@ pipeline {
         stage('Build and Push') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD'),
-                                     string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
+                    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         
                         // Build Docker image and tag it based on the branch
                         def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
