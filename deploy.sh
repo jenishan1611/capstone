@@ -6,6 +6,7 @@ PAYLOAD_FILE="payload.json"
 
 # Extract the branch name using jq
 BRANCH_NAME=$(cat $PAYLOAD_FILE | jq -r '.ref' | sed 's/refs\/heads\///')
+echo " $GIT_BRANCH "
 
 # Print the branch name for debugging
 echo "Branch: $BRANCH_NAME"
