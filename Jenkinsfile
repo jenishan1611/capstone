@@ -22,10 +22,10 @@ pipeline {
         stage('Build and Push') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    //withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         
                         // Build Docker image and tag it based on the branch
-                        def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                      //  def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
                         //def dockerRepo = branchName == 'dev' ? DOCKER_REPO_DEV : DOCKER_REPO_PROD
                         //def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
 
@@ -53,20 +53,20 @@ pipeline {
                     //         error "Failed to log in to Docker Hub."
                     //     }
                     // }
-                    withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
-                            def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
+                     withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD'),
+                                     string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
+
+                        // Your build and push logic here
+                        def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
                         def loginStatus = sh(script: loginCmd, returnStatus: true)
-                        
+
                         if (loginStatus == 0) {
                             echo "Docker login successful."
                         } else {
                             error "Failed to log in to Docker Hub."
                         }
-                        }
-
-                        
                     }
-                }
+                //}
             }
         }
     }
