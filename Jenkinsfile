@@ -5,6 +5,7 @@ pipeline {
         GITHUB_CREDENTIALS = credentials('git')
         //DOCKER_TOKEN = credentials('docker')
         DOCKER_CREDENTIALS = credentials('docker')
+        DOCKER_USERNAME='jenishan1611'
         DOCKER_REPO_DEV = 'jenishan1611/dev'
         DOCKER_REPO_PROD = 'jenishan1611/prod'
     }
@@ -42,8 +43,18 @@ pipeline {
                 //     echo "Pushing Docker image: ${imageName}"
                 //     docker.image(imageName).push()
                 // }
-                        withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
-                        def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
+                    //     withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
+                    //     def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
+                    //     def loginStatus = sh(script: loginCmd, returnStatus: true)
+                        
+                    //     if (loginStatus == 0) {
+                    //         echo "Docker login successful."
+                    //     } else {
+                    //         error "Failed to log in to Docker Hub."
+                    //     }
+                    // }
+                    withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
+                            def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
                         def loginStatus = sh(script: loginCmd, returnStatus: true)
                         
                         if (loginStatus == 0) {
@@ -51,7 +62,7 @@ pipeline {
                         } else {
                             error "Failed to log in to Docker Hub."
                         }
-                    }
+                        }
 
                         
                     }
