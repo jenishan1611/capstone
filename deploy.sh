@@ -2,10 +2,17 @@
 
 DOCKER_USERNAME="jenishan1611"
 
-BRANCH_NAME = $(git rev-parse --abbrev-ref HEAD)
+# Print the current working directory for debugging
+echo "Current Working Directory: $(pwd)"
+
+# Get the current branch name
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# Print the branch name for debugging
+echo "Branch: $BRANCH_NAME"
 
 if [[ $BRANCH_NAME == "dev" ]]; then
-    #./build.sh
+    # ./build.sh  # Uncomment this line if you want to build the Docker image
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
         echo "Docker login successful from dev."
@@ -25,7 +32,7 @@ if [[ $BRANCH_NAME == "dev" ]]; then
         echo "Failed to log in to Docker Hub."
     fi
 elif [[ $BRANCH_NAME == "master" ]]; then
-    #./build.sh
+    # ./build.sh  # Uncomment this line if you want to build the Docker image
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
         echo "Docker login successful from master."
