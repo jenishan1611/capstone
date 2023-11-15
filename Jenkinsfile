@@ -27,7 +27,7 @@ pipeline {
                         //def dockerRepo = branchName == 'dev' ? DOCKER_REPO_DEV : DOCKER_REPO_PROD
                         //def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
 
-                        sh "./build.sh"
+                        //sh "./build.sh"
                         sh "./deploy.sh"
 
                 //         // Log in to Docker Hub
