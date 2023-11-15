@@ -6,11 +6,7 @@ DOCKER_USERNAME="jenishan1611"
 echo "Branch: $GIT_BRANCH"
 
 if [[ $GIT_BRANCH == "origin/dev" ]]; then
-    # ./build.sh  # Uncomment this line if you want to build the Docker image
-    docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
-    if [ $? -eq 0 ]; then
-        echo "Docker login successful from dev."
-
+    # ./build.sh  
         IMAGE_NAME="reactimg"
 
         # Tag and push the Docker image for the 'dev' branch
@@ -22,15 +18,9 @@ if [[ $GIT_BRANCH == "origin/dev" ]]; then
         else
             echo "Failed to push Docker image to Docker Hub for 'dev' branch."
         fi
-    else
-        echo "Failed to log in to Docker Hub."
-    fi
-elif [[ $GIT_BRANCH == "origin/master" ]]; then
-    # ./build.sh  # Uncomment this line if you want to build the Docker image
-    docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
-    if [ $? -eq 0 ]; then
-        echo "Docker login successful from master."
 
+elif [[ $GIT_BRANCH == "origin/master" ]]; then
+    # ./build.sh 
         IMAGE_NAME="reactimg"
 
         # Tag and push the Docker image for the 'master' branch
@@ -42,9 +32,6 @@ elif [[ $GIT_BRANCH == "origin/master" ]]; then
         else
             echo "Failed to push Docker image to Docker Hub for 'master' branch."
         fi
-    else
-        echo "Failed to log in to Docker Hub."
-    fi
 else
     echo "Successfully pushed."
 fi
