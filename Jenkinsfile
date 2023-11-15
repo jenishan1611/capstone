@@ -66,7 +66,7 @@ pipeline {
                             error "Failed to log in to Docker Hub."
                         }
                     }
-                //}
+                }
             }
         }
     }
