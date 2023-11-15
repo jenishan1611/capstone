@@ -3,7 +3,7 @@
 DOCKER_USERNAME="jenishan1611"
 
 # Get the current branch name
-BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH_NAME=$(echo $GITHUB_REF | sed 's/refs\/heads\///')
 
 # Print the branch name for debugging
 echo "Branch: $BRANCH_NAME"
