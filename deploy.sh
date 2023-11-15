@@ -6,7 +6,7 @@ DOCKER_USERNAME="jenishan1611"
 echo "Current Working Directory: $(pwd)"
 
 # Get the current branch name
-BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH_NAME=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD)
 
 # Print the branch name for debugging
 echo "Branch: $BRANCH_NAME"
