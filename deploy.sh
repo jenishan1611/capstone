@@ -11,8 +11,8 @@ if [[ $BRANCH_NAME == "dev" ]]; then
         IMAGE_NAME="reactimg"
 
         # Tag and push the Docker image for the 'dev' branch
-        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME:dev
-        docker push $DOCKER_USERNAME/$IMAGE_NAME:dev
+        docker tag $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME
+        docker push $DOCKER_USERNAME/$IMAGE_NAME
 
         if [ $? -eq 0 ]; then
             echo "Docker image pushed successfully to Docker Hub for 'dev' branch."

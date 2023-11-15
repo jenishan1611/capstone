@@ -4,8 +4,8 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS = credentials('git')
         DOCKER_TOKEN = credentials('docker')
-        DOCKER_REPO_DEV = 'jenishan1611/dev-repo'
-        DOCKER_REPO_PROD = 'jenishan1611/prod-repo'
+        DOCKER_REPO_DEV = 'jenishan1611/dev'
+        DOCKER_REPO_PROD = 'jenishan1611/prod'
     }
 
     stages {
@@ -24,8 +24,8 @@ pipeline {
                         
                         // Build Docker image and tag it based on the branch
                         def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-                        def dockerRepo = branchName == 'dev' ? DOCKER_REPO_DEV : DOCKER_REPO_PROD
-                        def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
+                        //def dockerRepo = branchName == 'dev' ? DOCKER_REPO_DEV : DOCKER_REPO_PROD
+                        //def imageName = "${dockerRepo}:${branchName.toLowerCase()}"
 
                         sh "./build.sh"
                         sh "./deploy.sh"
