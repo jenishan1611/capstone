@@ -2,16 +2,10 @@
 
 DOCKER_USERNAME="jenishan1611"
 
-PAYLOAD_FILE="payload.json"
-
-# Extract the branch name using jq
-BRANCH_NAME=$(cat $PAYLOAD_FILE | jq -r '.ref' | sed 's/refs\/heads\///')
-echo " $GIT_BRANCH "
-
 # Print the branch name for debugging
-echo "Branch: $BRANCH_NAME"
+echo "Branch: $GIT_BRANCH"
 
-if [[ $BRANCH_NAME == "dev" ]]; then
+if [[ $GIT_BRANCH == "origin/dev" ]]; then
     # ./build.sh  # Uncomment this line if you want to build the Docker image
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
@@ -31,7 +25,7 @@ if [[ $BRANCH_NAME == "dev" ]]; then
     else
         echo "Failed to log in to Docker Hub."
     fi
-elif [[ $BRANCH_NAME == "master" ]]; then
+elif [[ $GIT_BRANCH == "origin/master" ]]; then
     # ./build.sh  # Uncomment this line if you want to build the Docker image
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
