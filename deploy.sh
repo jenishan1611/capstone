@@ -6,7 +6,7 @@ DOCKER_USERNAME="jenishan1611"
 echo "Branch: $GIT_BRANCH"
 
 if [[ $GIT_BRANCH == "origin/dev" ]]; then
-    # ./build.sh  
+        ./build.sh  
         IMAGE_NAME="reactimg"
 
         # Tag and push the Docker image for the 'dev' branch
@@ -20,7 +20,7 @@ if [[ $GIT_BRANCH == "origin/dev" ]]; then
         fi
 
 elif [[ $GIT_BRANCH == "origin/master" ]]; then
-    # ./build.sh 
+        ./build.sh 
         IMAGE_NAME="reactimg"
 
         # Tag and push the Docker image for the 'master' branch
