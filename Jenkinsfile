@@ -41,7 +41,7 @@ pipeline {
                 //     echo "Pushing Docker image: ${imageName}"
                 //     docker.image(imageName).push()
                 // }
-                        withCredentials([string(credentialsId: 'docker-credential-id', variable: 'DOCKER_TOKEN')]) {
+                        withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
                         def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
                         def loginStatus = sh(script: loginCmd, returnStatus: true)
                         
