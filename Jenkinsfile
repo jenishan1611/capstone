@@ -4,7 +4,7 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS = credentials('git')
         //DOCKER_TOKEN = credentials('docker')
-        DOCKER_CREDENTIALS = credentials('docker')
+        DOCKER_CREDENTIALS = credentials('DOCKER_TOKEN')
         DOCKER_USERNAME='jenishan1611'
         DOCKER_REPO_DEV = 'jenishan1611/dev'
         DOCKER_REPO_PROD = 'jenishan1611/prod'
@@ -54,7 +54,7 @@ pipeline {
                     //     }
                     // }
                      withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD'),
-                                     string(credentialsId: 'docker', variable: 'DOCKER_TOKEN')]) {
+                                     string(credentialsId: 'DOCKER_TOKEN', variable: 'DOCKER_TOKEN')]) {
 
                         // Your build and push logic here
                         def loginCmd = "docker login -u ${DOCKER_USERNAME} -p \${DOCKER_TOKEN}"
