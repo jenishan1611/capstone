@@ -4,7 +4,7 @@ pipeline {
     environment {
         GITHUB_CREDENTIALS = credentials('git')
         //DOCKER_TOKEN = credentials('docker')
-        DOCKER_CREDENTIALS = credentials('docker-credential-id')
+        DOCKER_CREDENTIALS = credentials('docker')
         DOCKER_REPO_DEV = 'jenishan1611/dev'
         DOCKER_REPO_PROD = 'jenishan1611/prod'
     }
