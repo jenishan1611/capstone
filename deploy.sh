@@ -6,7 +6,7 @@ if [[ $BRANCH_NAME == "dev" ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
-        echo "Docker login successful."
+        echo "Docker login successful from dev."
 
         IMAGE_NAME="reactimg"
 
@@ -26,7 +26,7 @@ elif [[ $BRANCH_NAME == "master" ]]; then
     ./build.sh
     docker login --username $DOCKER_USERNAME --password $DOCKER_TOKEN
     if [ $? -eq 0 ]; then
-        echo "Docker login successful."
+        echo "Docker login successful from master."
 
         IMAGE_NAME="reactimg"
 

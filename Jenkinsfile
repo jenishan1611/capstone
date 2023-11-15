@@ -35,7 +35,7 @@ pipeline {
 
                     // Tag and push the Docker image
                     echo "Tagging Docker image: ${imageName}"
-                    docker.image(imageName).withTag(branchName.toLowerCase()).push()
+                    docker.image(imageName).push("--tag=${branchName.toLowerCase()}")
 
                     echo "Pushing Docker image: ${imageName}"
                     docker.image(imageName).push()
